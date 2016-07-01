@@ -177,120 +177,20 @@ table {
     -moz-background-size: 16px 16px;
   }
 }
-html {
-  background-color: #eeeeee;
-}
-body {
-  padding: 0;
-  margin: 0;
-  font-family: arial, sans-serif;
-  background-color: #eeeeee;
-  background-image: -webkit-gradient(linear,left top,left bottom,from(#dddddd),to(#eeeeee));
-  background-image: -webkit-linear-gradient(top,#dddddd,#eeeeee);
-  background-image: -moz-linear-gradient(top,#dddddd,#eeeeee);
-  background-image: -o-linear-gradient(top,#dddddd,#eeeeee);
-  background-image: linear-gradient(to bottom,#dddddd,#eeeeee);
-}
-p {
-  margin: 10px 0;
-}
-#header {
-  padding: 5px;
-  background-color: #0DA20D;
-  background-image: -webkit-linear-gradient(top,#36C036,#0DA20D);
-  background-image: linear-gradient(to bottom,#36C036,#0DA20D);
-  border-bottom: #004300 2px solid;
-}
-#header #headerOptions {
-  float: right;
-  text-align: right;
-}
-#header #headerOptions #actions a {
-  margin: 0px 5px;
-  text-decoration: none;
-  color: #000000;
-}
-#header #headerOptions #actions .currentCalendarDate {
-  font-size: 1.1em;
-  font-weight: bold;
-}
-#header img.logo {
-  max-width: 20px;
-  max-height: 20px;
-  display: inline;
-}
-#header h1 {
-  display: inline;
-  font-size: 1.6em;
-  font-weight: bold;
-}
-#header h1 a {
-  text-decoration: none;
-  color: black;
-}
-#header h2 {
-  display: inline;
-  font-size: 1.4em;
-}
-#header h2 a {
-  text-decoration: none;
-  color: black;
-}
-#header h3 {
-  padding: 0px 0px 0px 15px;
-  display: inline;
-  font-size: 1.3em;
-}
-#header h3 a {
-  text-decoration: none;
-  color: black;
-}
-#header #afterHeader {
-  clear: both;
-}
-#calendarPosition {
+.calendarLabel,
+.calendarControls {
   text-align: right;
   padding: 5px 0 10px 0;
 }
-#calendarPosition .date {
+.calendarLabel .date,
+.calendarControls .date {
   font-size: 1.6em;
   font-weight: bold;
 }
-#calendarPosition .timezone {
-  font-size: 1.0em;
-}
-#page {
-  clear: both;
-  padding: 5px;
-}
-div.filterListEventWrapper {
-  padding: 5px 0;
-}
-div.filterListEventWrapper form.filterListEvent {
-  background: #72DA72;
-  padding: 10px;
-}
-div.filterListEventWrapper form.filterListEvent div.inputField {
-  display: inline;
-  padding: 10px;
-}
-div.filterListEventWrapper form.filterListEvent #eventListFilterFromWrapper input {
-  background: url('/theme/default/img/dateFilterBackground.png') no-repeat right white;
-}
-div.filterListEventWrapper form.filterListEvent div.submitField {
-  display: inline;
-  padding: 10px;
-}
-div.filterListEventWrapper form.filterListEvent div.submitField input {
-  background: #36C036;
-  color: black;
-  border: 2px solid #36C036;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
-  cursor: pointer;
+.calendarControls a {
+  margin: 0px 5px;
+  text-decoration: none;
+  color: #000000;
 }
 table.calendar {
   width: 100%;
@@ -357,12 +257,6 @@ table.calendar .deleted {
 }
 table.calendar .cancelled {
   background: url('/theme/default/img/cancelledBackground.png');
-}
-#footer {
-  padding: 10px 5px;
-  text-align: center;
-  font-style: italic;
-  font-size: 0.8em;
 }
 #PopupMask {
   position: fixed;

@@ -103,7 +103,29 @@ class GroupController {
 
 		return true;
 	}
-	
+
+    function setUpMainTab(Application $app) {
+
+
+        $mrb = new MediaRepositoryBuilder($app);
+        $mrb->setIncludeDeleted(false);
+        $mrb->setSite($app['currentSite']);
+        $mrb->setGroup($this->parameters['group']);
+        $this->parameters['medias'] = $mrb->fetchAll();
+
+        // we only want to link to these if there are any
+        $importurlRepoBuilder = new ImportRepositoryBuilder($app);
+        $importurlRepoBuilder->setGroup($this->parameters['group']);
+        $this->parameters['importurls'] = $importurlRepoBuilder->fetchAll();
+
+
+        $curatedListRepoBuilder = new CuratedListRepositoryBuilder($app);
+        $curatedListRepoBuilder->setContainsGroup($this->parameters['group']);
+        $curatedListRepoBuilder->setIncludeDeleted(false);
+        $this->parameters['curatedLists'] = $curatedListRepoBuilder->fetchAll();
+
+    }
+
 	function show($slug, Request $request, Application $app) {
 		
 		if (!$this->build($slug, $request, $app)) {
@@ -123,18 +145,7 @@ class GroupController {
         $this->parameters['eventListFilterParams']->set($_GET);
 		
 		$this->parameters['events'] = $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->fetchAll();
-		
-				
-		$mrb = new MediaRepositoryBuilder($app);
-		$mrb->setIncludeDeleted(false);
-		$mrb->setSite($app['currentSite']);
-		$mrb->setGroup($this->parameters['group']);
-		$this->parameters['medias'] = $mrb->fetchAll();
-		
-		// we only want to link to these if there are any
-		$importurlRepoBuilder = new ImportRepositoryBuilder($app);
-		$importurlRepoBuilder->setGroup($this->parameters['group']);
-		$this->parameters['importurls'] = $importurlRepoBuilder->fetchAll();
+
 		
 		$groupRepo = new GroupRepository($app);
 		if (!$this->parameters['group']->getIsDeleted() && $app['currentUserPermissions']->hasPermission("org.openacalendar","CALENDAR_CHANGE")
@@ -144,10 +155,7 @@ class GroupController {
 			$this->parameters['isGroupRunningOutOfFutureEvents'] = 0;
 		}
 
-		$curatedListRepoBuilder = new CuratedListRepositoryBuilder($app);
-		$curatedListRepoBuilder->setContainsGroup($this->parameters['group']);
-		$curatedListRepoBuilder->setIncludeDeleted(false);
-		$this->parameters['curatedLists'] = $curatedListRepoBuilder->fetchAll();
+        $this->setUpMainTab($app);
 
 		return $app['twig']->render('site/group/show.html.twig', $this->parameters);
 	}
@@ -386,7 +394,7 @@ class GroupController {
 
         $this->parameters['eventListFilterParams'] = new EventFilterParams($app, null, $app['currentSite']);
         $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->setGroup($this->parameters['group']);
-        //$this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
+        $this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
         $this->parameters['eventListFilterParams']->set($_GET);
 
         $this->parameters['calendar'] = new \RenderCalendar($app, $this->parameters['eventListFilterParams']);
@@ -400,7 +408,9 @@ class GroupController {
 		list($this->parameters['prevYear'],$this->parameters['prevMonth'],$this->parameters['nextYear'],$this->parameters['nextMonth']) = $this->parameters['calendar']->getPrevNextLinksByMonth();
 		
 		$this->parameters['pageTitle'] = $this->parameters['group']->getTitle();
-		return $app['twig']->render('/site/calendarPage.html.twig', $this->parameters);
+
+        $this->setUpMainTab($app);
+		return $app['twig']->render('site/group/calendar.monthly.html.twig', $this->parameters);
 	}
 	
 	function calendar($slug, $year, $month, Request $request, Application $app) {
@@ -410,7 +420,7 @@ class GroupController {
 
         $this->parameters['eventListFilterParams'] = new EventFilterParams($app, null, $app['currentSite']);
         $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->setGroup($this->parameters['group']);
-        //$this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
+        $this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
         $this->parameters['eventListFilterParams']->set($_GET);
 
         $this->parameters['calendar'] = new \RenderCalendar($app, $this->parameters['eventListFilterParams']);
@@ -424,7 +434,8 @@ class GroupController {
 		list($this->parameters['prevYear'],$this->parameters['prevMonth'],$this->parameters['nextYear'],$this->parameters['nextMonth']) = $this->parameters['calendar']->getPrevNextLinksByMonth();
 		
 		$this->parameters['pageTitle'] = $this->parameters['group']->getTitle();
-		return $app['twig']->render('/site/calendarPage.html.twig', $this->parameters);
+        $this->setUpMainTab($app);
+		return $app['twig']->render('site/group/calendar.monthly.html.twig', $this->parameters);
 	}
 	
 	
