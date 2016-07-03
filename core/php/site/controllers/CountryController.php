@@ -88,8 +88,8 @@ class CountryController {
 
         $this->parameters['eventListFilterParams'] = new EventFilterParams($app, null, $app['currentSite']);
         $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->setCountry($this->parameters['country']);
-        //$this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
-        //$this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
+        $this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
+        $this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
         $this->parameters['eventListFilterParams']->set($_GET);
 
 		$this->parameters['calendar'] = new \RenderCalendar($app, $this->parameters['eventListFilterParams']);
@@ -103,7 +103,7 @@ class CountryController {
 		list($this->parameters['prevYear'],$this->parameters['prevMonth'],$this->parameters['nextYear'],$this->parameters['nextMonth']) = $this->parameters['calendar']->getPrevNextLinksByMonth();
 		
 		$this->parameters['pageTitle'] = $this->parameters['country']->getTitle();
-		return $app['twig']->render('/site/calendarPage.html.twig', $this->parameters);
+		return $app['twig']->render('/site/country/calendar.monthly.html.twig', $this->parameters);
 	}
 	
 	function calendar($slug, $year, $month, Request $request, Application $app) {
@@ -113,8 +113,8 @@ class CountryController {
 
         $this->parameters['eventListFilterParams'] = new EventFilterParams($app, null, $app['currentSite']);
         $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->setCountry($this->parameters['country']);
-        //$this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
-        //$this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
+        $this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
+        $this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
         $this->parameters['eventListFilterParams']->set($_GET);
 
         $this->parameters['calendar'] = new \RenderCalendar($app, $this->parameters['eventListFilterParams']);
@@ -128,7 +128,7 @@ class CountryController {
 		list($this->parameters['prevYear'],$this->parameters['prevMonth'],$this->parameters['nextYear'],$this->parameters['nextMonth']) = $this->parameters['calendar']->getPrevNextLinksByMonth();
 		
 		$this->parameters['pageTitle'] = $this->parameters['country']->getTitle();
-		return $app['twig']->render('/site/calendarPage.html.twig', $this->parameters);
+		return $app['twig']->render('/site/country/calendar.monthly.html.twig', $this->parameters);
 	}
 	
 	function newSplash($slug, Request $request, Application $app) {

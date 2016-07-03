@@ -66,7 +66,7 @@
 						<div class="above"></div>
 						{% if currentUser is not null and showCurrentUserOptions is defined and showCurrentUserOptions %}
 							<div class="currentUserAttendance" id="currentUserAttendanceForEvent{{ event.slug }}">
-								<a href="/event/{{ event.slugForUrl }}" onclick="showCurrentUserAttendanceForEvent({{ event.slug }}); return false;" class="activationLinkWrapper">
+								<a href="/event/{{ event.slugForUrl }}" onclick="showCurrentUserAttendanceForEventFromCalendar({{ event.slug }}); return false;" class="activationLinkWrapper">
 									{% if event.userIsPlanAttending %}
 										<div class="iconUserAttendingSmall" title="You are attending"></div>
 									{% elseif event.userIsPlanMaybeAttending %}

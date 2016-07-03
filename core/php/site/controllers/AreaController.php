@@ -209,8 +209,8 @@ class AreaController {
 
         $this->parameters['eventListFilterParams'] = new EventFilterParams($app, null, $app['currentSite']);
         $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->setArea($this->parameters['area']);
-        //$this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
-        //$this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
+        $this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
+        $this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
         $this->parameters['eventListFilterParams']->set($_GET);
 
 		$this->parameters['calendar'] = new \RenderCalendar($app, $this->parameters['eventListFilterParams']);
@@ -224,7 +224,7 @@ class AreaController {
 		list($this->parameters['prevYear'],$this->parameters['prevMonth'],$this->parameters['nextYear'],$this->parameters['nextMonth']) = $this->parameters['calendar']->getPrevNextLinksByMonth();
 		
 		$this->parameters['pageTitle'] = $this->parameters['area']->getTitle();
-		return $app['twig']->render('/site/calendarPage.html.twig', $this->parameters);
+		return $app['twig']->render('/site/area/calendar.monthly.html.twig', $this->parameters);
 	}
 	
 	function calendar($slug, $year, $month, Request $request, Application $app) {
@@ -234,8 +234,8 @@ class AreaController {
 
         $this->parameters['eventListFilterParams'] = new EventFilterParams($app, null, $app['currentSite']);
         $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->setArea($this->parameters['area']);
-        //$this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
-        //$this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
+        $this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
+        $this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
         $this->parameters['eventListFilterParams']->set($_GET);
 
         $this->parameters['calendar'] = new \RenderCalendar($app, $this->parameters['eventListFilterParams']);
@@ -249,7 +249,7 @@ class AreaController {
 		list($this->parameters['prevYear'],$this->parameters['prevMonth'],$this->parameters['nextYear'],$this->parameters['nextMonth']) = $this->parameters['calendar']->getPrevNextLinksByMonth();
 		
 		$this->parameters['pageTitle'] = $this->parameters['area']->getTitle();
-		return $app['twig']->render('/site/calendarPage.html.twig', $this->parameters);
+		return $app['twig']->render('/site/area/calendar.monthly.html.twig', $this->parameters);
 	}
 	
 	

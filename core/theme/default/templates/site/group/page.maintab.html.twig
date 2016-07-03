@@ -125,13 +125,15 @@
 
 		<div class="afterInnerPageContent"></div>
 
+		{% include '/site/eventListFilterParams.html.twig' %}
+
 		<div class="switcherWrapper">
 			<div class="switcherList">
 				<div class="switcherAction {% block switcherAgenda %}{% endblock %}">
-					<a href="/group/{{  group.slug }}">Agenda</a>
+					<a href="/group/{{  group.slug }}?{%  if eventListFilterParams is defined and eventListFilterParams %}{{ eventListFilterParams.getGetString() }}{%  endif %}">Agenda</a>
 				</div>
 				<div class="switcherAction {% block switcherMonthly %}{% endblock %}">
-					<a href="/group/{{  group.slug }}/calendar">Monthly</a>
+					<a href="/group/{{  group.slug }}/calendar?{%  if eventListFilterParams is defined and eventListFilterParams %}{{ eventListFilterParams.getGetString() }}{%  endif %}">Monthly</a>
 				</div>
 			</div>
 		</div>

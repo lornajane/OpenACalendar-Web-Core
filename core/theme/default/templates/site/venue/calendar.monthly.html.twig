@@ -5,43 +5,36 @@
  # @copyright (c) JMB Technology Limited, http://jmbtechnology.co.uk/
  # @author James Baster <james@jarofgreen.co.uk>
  #}
-{% extends 'site/group/page.maintab.html.twig' %}
+{% extends 'site/venue/page.mainTab.html.twig' %}
+
 
 {% block bodyClass %}calendarWidth{% endblock %}
 
-{% block pageTitle %}{{ group.title }} - {% endblock %}
+{% block pageTitle %}{{ country.title }} - {% endblock %}
 
+{% block tabDetails %}currentTab{% endblock %}
 
 {% block htmlHeader %}
-	{% if not currentSite.isWebRobotsAllowed or group.isDeleted %}<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">{% endif %}
 	<link rel="stylesheet" type="text/css" href="/theme/default/css/calendar.css?v={{ config.assetsVersion }}">
+	{% if not currentSite.isWebRobotsAllowed %}<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">{% endif %}
 	{{ parent() }}
 {% endblock %}
 
-{% block tabDetails %}currentTab{% endblock %}
+
 
 {% block switcherMonthly %}current{% endblock %}
 
 {% block eventsContent %}
 
+	{%  include '/site/common/calendar.monthly.html.twig' with {'addURL':'/event/new', 'calURL':'/venue/' ~ venue.slugForURL ~ '/calendar' } %}
 
-	{%  include '/site/common/calendar.monthly.html.twig' with {'addURL':'/event/new?group=' ~ group.slug, 'calURL':'/group/' ~ group.slugForUrl ~ '/calendar' } %}
-
-
-{% endblock %}
-
-{% block scriptsForState %}
-	{# % include '/site/common/mediasJavaScriptInformation.html.twig' with { medias:medias } % #}
-	{{ parent() }}
 {% endblock %}
 
 {% block scripts %}
+	{{ parent() }}
 	<script type="text/javascript">
 		var showCurrentUserOptions = {% if currentUser is not null and showCurrentUserOptions is defined and showCurrentUserOptions %}true{% else %}false{% endif %};
 	</script>
 	<script src="/theme/default/js/calendar.site.js?v={{ config.assetsVersion }}" type="text/javascript"></script>
-	<script src="/theme/default/js/eventFilterParams.js?v={{ config.assetsVersion }}" type="text/javascript"></script>
-	<script src="/theme/default/js/mediaPopup.js?v={{ config.assetsVersion }}" type="text/javascript"></script>
-	<script type="text/javascript" src="/theme/default/js/userAtEvents.site.js?v={{ config.assetsVersion }}"></script>
 {% endblock %}
 

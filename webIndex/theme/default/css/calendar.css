@@ -54,6 +54,9 @@
     -moz-background-size: 16px 16px;
   }
 }
+#page.calendarWidth {
+  max-width: 1600px;
+}
 .calendarLabel,
 .calendarControls {
   text-align: right;

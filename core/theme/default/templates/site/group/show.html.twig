@@ -18,8 +18,6 @@
 
 {% block eventsContent %}
 
-		{% include '/site/eventListFilterParams.html.twig' %}
-
 		<ul class="mainListEvents">
 			{%  if events|length > 0 %}
 				{% for event in events %}

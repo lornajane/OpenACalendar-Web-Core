@@ -29,7 +29,7 @@
 	<body>
 		<div id="page">
 			{% include 'site/pageHeader.html.twig' %}
-			<div id="body">
+			<div id="body" class="{% block bodyClass %}normalWidth{% endblock %}">
 				{% if  currentUser is not null and config.siteReadOnly %}
 					<div class="flash-error">
 						Sorry, the site is currently read only. {{ config.siteReadOnlyReason }}
