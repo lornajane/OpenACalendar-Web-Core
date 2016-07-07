@@ -10,7 +10,6 @@
 {% block bodyClass %}calendarWidth{% endblock %}
 
 {% block htmlHeader %}
-	<link rel="stylesheet" type="text/css" href="/theme/default/css/calendar.css?v={{ config.assetsVersion }}">
 	{{ parent() }}
 {% endblock %}
 
@@ -19,7 +18,7 @@
 
 {% block eventsContent %}
 
-	{%  include '/index/common/calendar.monthly.html.twig' with { 'calURL':'/me/calendar' } %}
+	{%  include '/index/common/calendar.monthly.html.twig' with { 'showCurrentUserOptions':true, 'calURL':'/me/calendar' } %}
 
 {% endblock %}
 

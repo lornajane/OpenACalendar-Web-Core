@@ -980,8 +980,8 @@ form {
 		.switcherAction {
 			background: @colourLighter2;
 			display: inline;
-			border: 1px solid #000000;
 			padding: 5px 15px;
+			.rounded-corners(2px);
 			a {
 				padding: 10px 30px;
 				text-decoration: none;
@@ -989,6 +989,8 @@ form {
 			}
 		}
 		.current {
+			border: 1px solid #000000;
+			.rounded-corners(2px);
 			background: @colourLighter1;
 			a {
 				font-weight: bold;

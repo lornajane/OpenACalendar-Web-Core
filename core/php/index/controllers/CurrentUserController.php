@@ -195,7 +195,6 @@ class CurrentUserController {
 				'prevMonth' => $prevMonth,
 				'nextYear' => $nextYear,
 				'nextMonth' => $nextMonth,
-				'showCurrentUserOptions' => true,
 			));
 	}
 	
@@ -217,7 +216,6 @@ class CurrentUserController {
 				'prevMonth' => $prevMonth,
 				'nextYear' => $nextYear,
 				'nextMonth' => $nextMonth,
-				'showCurrentUserOptions' => true,
 			));
 	}
 	

@@ -177,6 +177,7 @@ class CuratedListController {
         $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->setCuratedList($this->parameters['curatedlist']);
         $this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
         $this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
+        $this->parameters['eventListFilterParams']->setFallBackFrom(true);
         $this->parameters['eventListFilterParams']->set($_GET);
 
         $this->parameters['calendar'] = new \RenderCalendar($app, $this->parameters['eventListFilterParams']);
@@ -202,6 +203,7 @@ class CuratedListController {
         $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->setCuratedList($this->parameters['curatedlist']);
         $this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
         $this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
+        $this->parameters['eventListFilterParams']->setFallBackFrom(true);
         $this->parameters['eventListFilterParams']->set($_GET);
 
         $this->parameters['calendar'] = new \RenderCalendar($app, $this->parameters['eventListFilterParams']);

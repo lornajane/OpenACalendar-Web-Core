@@ -148,3 +148,9 @@
 	{% include '/site/common/mediasJavaScriptInformation.html.twig' with { medias:medias } %}
 	{{ parent() }}
 {% endblock %}
+
+{% block scripts %}
+	<script src="/theme/default/js/eventFilterParams.js?v={{ config.assetsVersion }}" type="text/javascript"></script>
+	<script src="/theme/default/js/mediaPopup.js?v={{ config.assetsVersion }}" type="text/javascript"></script>	{{ parent() }}
+	{{ parent() }}
+{% endblock %}

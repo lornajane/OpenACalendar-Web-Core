@@ -124,7 +124,20 @@ class EventFilterParams {
 	}
 
 	// ############################### params
-	
+
+    protected $fallBackFromNow = false;
+    protected $fallBackFrom;
+
+    /**
+     * If setHasDateControls(false), the Fallback sets what will be used in getGetString() instead.
+     * @param $fallBackFromNow
+     * @param null $fallBackFrom
+     */
+    public function setFallBackFrom( $fallBackFromNow, $fallBackFrom = null ) {
+        $this->fallBackFromNow = $fallBackFromNow;
+        $this->fallBackFrom = is_a($fallBackFrom, "DateTime") ? $fallBackFrom->format('j F Y') : $fallBackFrom;
+    }
+
 	protected $fromNow = true;
 	protected $from;
 	protected $include_deleted = false;
@@ -233,8 +246,14 @@ class EventFilterParams {
         if ($this->hasDateControls) {
             if ( $this->fromNow ) {
                 $out[] = 'fromNow=1';
-            } else {
+            } else if ($this->from) {
                 $out[] = 'from=' . $this->from;
+            }
+        } else {
+            if ( $this->fallBackFromNow ) {
+                $out[] = 'fromNow=1';
+            } else if ($this->fallBackFrom) {
+                $out[] = 'from=' . $this->fallBackFrom;
             }
         }
 

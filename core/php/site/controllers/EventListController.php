@@ -46,6 +46,7 @@ class EventListController {
         $params->setHasDateControls(false);
         $params->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
         $params->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
+        $params->setFallBackFrom(true);
         $params->set($_GET);
 
 		$cal = new \RenderCalendar($app, $params);
@@ -64,7 +65,6 @@ class EventListController {
 				'nextMonth' => $nextMonth,
 				'pageTitle' => 'Calendar',
                 'eventListFilterParams' => $params,
-				'showCurrentUserOptions' => true,
 			));
 	}
 	
@@ -74,6 +74,7 @@ class EventListController {
         $params->setHasDateControls(false);
         $params->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
         $params->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
+        $params->setFallBackFrom(true);
         $params->set($_GET);
 
         $cal = new \RenderCalendar($app, $params);
@@ -83,7 +84,7 @@ class EventListController {
 			$cal->getEventRepositoryBuilder()->setUserAccount($app['currentUser'], true);
 		}
 		$cal->byMonth($year, $month, true);
-		
+
 		list($prevYear,$prevMonth,$nextYear,$nextMonth) = $cal->getPrevNextLinksByMonth();
 
 		return $app['twig']->render('/site//eventlist/calendar.monthly.html.twig', array(
@@ -94,7 +95,6 @@ class EventListController {
 				'nextMonth' => $nextMonth,
 				'pageTitle' => 'Calendar',
                 'eventListFilterParams' => $params,
-				'showCurrentUserOptions' => true,
 			));
 	}
 	

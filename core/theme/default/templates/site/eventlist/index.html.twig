@@ -16,9 +16,6 @@
 	{% if not currentSite.isWebRobotsAllowed %}<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">{% endif %}
 {% endblock %}
 
-{% block breadcrumbs %}
-	{%  include 'site/breadcrumbs.html.twig' with { 'breadcrumbs': [  { 'url':'/event', 'label':'events' } ]  } %}
-{% endblock %}
 
 {% block switcherAgenda %}current{% endblock %}
 

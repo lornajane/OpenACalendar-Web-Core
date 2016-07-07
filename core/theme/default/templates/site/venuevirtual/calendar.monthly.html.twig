@@ -13,15 +13,14 @@
 
 
 {% block htmlHeader %}
-	<link rel="stylesheet" type="text/css" href="/theme/default/css/calendar.css?v={{ config.assetsVersion }}">
-	{% if not currentSite.isWebRobotsAllowed %}<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">{% endif %}
+	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 {% endblock %}
 
 {% block switcherMonthly %}current{% endblock %}
 
 {% block eventsContent %}
 
-	{%  include '/site/common/calendar.monthly.html.twig' with {'addURL':'/event/new', 'calURL':'/venue/virtual/calendar' } %}
+	{%  include '/site/common/calendar.monthly.html.twig' with {'showCurrentUserOptions':true, 'addURL':'/event/new', 'calURL':'/venue/virtual/calendar' } %}
 
 {% endblock %}
 
@@ -32,7 +31,7 @@
 
 {% block scripts %}
 	<script type="text/javascript">
-		var showCurrentUserOptions = {% if currentUser is not null and showCurrentUserOptions is defined and showCurrentUserOptions %}true{% else %}false{% endif %};
+		var showCurrentUserOptions = {% if currentUser is not null %}true{% else %}false{% endif %};
 	</script>
 	<script src="/theme/default/js/eventFilterParams.js?v={{ config.assetsVersion }}" type="text/javascript"></script>
 	<script src="/theme/default/js/calendar.site.js?v={{ config.assetsVersion }}" type="text/javascript"></script>

@@ -14,8 +14,7 @@
 {% block tabDetails %}currentTab{% endblock %}
 
 {% block htmlHeader %}
-	<link rel="stylesheet" type="text/css" href="/theme/default/css/calendar.css?v={{ config.assetsVersion }}">
-	{% if not currentSite.isWebRobotsAllowed %}<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">{% endif %}
+	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 	{{ parent() }}
 {% endblock %}
 
@@ -23,14 +22,14 @@
 
 {% block eventsContent %}
 
-	{%  include '/site/common/calendar.monthly.html.twig' with {'addURL':'/event/new', 'calURL':'/area/' ~ area.slugForURL ~ '/calendar' } %}
+	{%  include '/site/common/calendar.monthly.html.twig' with {'showCurrentUserOptions':true, 'addURL':'/event/new', 'calURL':'/area/' ~ area.slugForURL ~ '/calendar' } %}
 
 {% endblock %}
 
 {% block scripts %}
 	{{ parent() }}
 	<script type="text/javascript">
-		var showCurrentUserOptions = {% if currentUser is not null and showCurrentUserOptions is defined and showCurrentUserOptions %}true{% else %}false{% endif %};
+		var showCurrentUserOptions = {% if currentUser is not null %}true{% else %}false{% endif %};
 	</script>
 	<script src="/theme/default/js/calendar.site.js?v={{ config.assetsVersion }}" type="text/javascript"></script>
 {% endblock %}

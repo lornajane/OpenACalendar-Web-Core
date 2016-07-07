@@ -232,6 +232,7 @@ class VenueController {
         $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->setVenue($this->parameters['venue']);
         $this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
         $this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
+        $this->parameters['eventListFilterParams']->setFallBackFrom(true);
         $this->parameters['eventListFilterParams']->set($_GET);
 
         $this->parameters['calendar'] = new \RenderCalendar($app, $this->parameters['eventListFilterParams']);
@@ -239,8 +240,7 @@ class VenueController {
 
 		if ($app['currentUser']) {
 			$this->parameters['calendar']->getEventRepositoryBuilder()->setUserAccount($app['currentUser'], true);
-			$this->parameters['showCurrentUserOptions'] = true;
-		}	
+		}
 		$this->parameters['calendar']->byDate(\TimeSource::getDateTime(), 31, true);
 		
 		list($this->parameters['prevYear'],$this->parameters['prevMonth'],$this->parameters['nextYear'],$this->parameters['nextMonth']) = $this->parameters['calendar']->getPrevNextLinksByMonth();
@@ -261,6 +261,7 @@ class VenueController {
         $this->parameters['eventListFilterParams']->getEventRepositoryBuilder()->setVenue($this->parameters['venue']);
         $this->parameters['eventListFilterParams']->setHasTagControl($app['currentSiteFeatures']->has('org.openacalendar','Tag'));
         $this->parameters['eventListFilterParams']->setHasGroupControl($app['currentSiteFeatures']->has('org.openacalendar','Group'));
+        $this->parameters['eventListFilterParams']->setFallBackFrom(true);
         $this->parameters['eventListFilterParams']->set($_GET);
 
         $this->parameters['calendar'] = new \RenderCalendar($app, $this->parameters['eventListFilterParams']);
